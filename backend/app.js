@@ -19,6 +19,11 @@ app.get("/", function(req,res){
     res.send("<h1>main Page</h1>");
 });
 
+app.get("/bb", function(req,res){
+    console.log(__dirname);
+    res.sendFile(__dirname+'/bb.html');
+});
+
 app.get("/aa", async function(req,res){
     try{
         const data = await fs.readFile('aa.html');
