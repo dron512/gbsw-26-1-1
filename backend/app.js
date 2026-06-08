@@ -1,3 +1,4 @@
+// 
 const express = require('express');
 const fs = require('fs/promises');
 const mysql = require('mysql2/promise');
@@ -80,3 +81,4 @@ app.post("/adduser", (req, res) => {
 app.listen(PORT, () => {
     console.log(`서버가 http://localhost:${PORT} 에서 실행 중입니다.`);
 });
+

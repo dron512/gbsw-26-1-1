@@ -1,0 +1,35 @@
+-- 1. uesrs 테이블을 아래와 같이 작성하는 sql 작성하시오
+-- id 숫자인데 자동증가되며 기본키로 설정하세요
+-- name 컬럼인데 문자열이고 길이는 100으로 설정하고 null은 허용하지 않는다
+CREATE TABLE users(
+	id int auto_increment primary key,
+   name VARCHAR(50) NOT NULL,
+   email VARCHAR(100) NOT NULL
+);
+
+-- 2. users 이름이'aaa' 이메일이 aaabb@naver.com 삽입하는 sql문 작성하시오
+INSERT INTO users (name, email) 
+VALUES
+('이길동', 'ccc@naver.com'),
+('김김골', 'bbb@naver.com'),
+('이언수', 'fff@naver.com'),
+('최진수','ddd@naver.com');
+
+--3 users 테이블 조회하는 sql 문을 작성하시오
+SELECT * FROM users;
+
+--4 users 테이블에서 id =3 인 것을 조회하는 sql 문을 작성하시오
+SELECT * FROM users WHERE id=3;
+
+--5 users 테이블에서 name이 이길동인것을 조회하는 sql 문을 작성하시오
+SELECT * FROM users WHERE name='qwerqwer';
+
+-- 6. 이길동인것을 황길동으로 수정하세요
+UPDATE users 
+SET name='황길동'
+WHERE name='이길동';
+
+SELECT * FROM users;
+
+--7 황길동을 삭제하시오
+DELETE FROM users WHERE name='황길동';
