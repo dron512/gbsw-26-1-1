@@ -1,7 +1,10 @@
-// 
+// express 웹서버
 const express = require('express');
+// filesystem 모듈
 const fs = require('fs/promises');
+// mysql 연결 하는 모듈
 const mysql = require('mysql2/promise');
+
 const app = express();
 
 // 서버가 사용할 포트 번호
@@ -9,7 +12,7 @@ const PORT = 3000;
 
 // 미들웨어 설정: HTTP 요청의 본문(body)에 있는 JSON 데이터를 파싱(번역)
 app.use(express.json());
-// form 태그 안에 들어오는 내용 파싱
+// form 태그 안에 들어오는 내용 파싱(번역)
 app.use(express.urlencoded({ extends: true }))
 
 const pool = mysql.createPool({
@@ -72,6 +75,10 @@ app.get("/users", async (req, res) => {
 app.post("/adduser", (req, res) => {
     console.log("req.body");
     console.log(req.body);
+    try{
+        
+    }
+
     res.send("msgsuccess");
 })
 
