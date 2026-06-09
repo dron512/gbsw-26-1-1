@@ -4,6 +4,8 @@ const express = require('express');
 const fs = require('fs/promises');
 // mysql 연결 하는 모듈
 const mysql = require('mysql2/promise');
+// Nunjucks 모듈 추가
+const nunjucks = require('nunjucks');
 
 const app = express();
 
@@ -15,11 +17,16 @@ app.use(express.json());
 // form 태그 안에 들어오는 내용 파싱(번역)
 app.use(express.urlencoded({ extends: true }))
 
+// 넌적스 환경설정 시작
+nunjucks.configure('views', { express: app, watch:true } );
+app.set('view engine', 'html');
+// 넌적스 환경설정 끝
+
 const pool = mysql.createPool({
     host: "127.0.0.1",
     user: "root",
     password: "1234",
-    database: "gbsw1-1",
+    database: "bbb",
     port: "3306",
     waitForConnections: true,
     connectionLimit: 10,
@@ -33,7 +40,8 @@ const pool = mysql.createPool({
 // ];
 
 app.get("/", function (req, res) {
-    res.send("<h1>main Page</h1><a href='/bb'>bb</a>");
+    // res.send("<h1>main Page</h1><a href='/bb'>bb</a>");
+    res.render('main');
 });
 
 app.get("/bb", function (req, res) {
@@ -72,15 +80,36 @@ app.get("/users", async (req, res) => {
 
 // get -> req.query
 // post -> req.body
-app.post("/adduser", (req, res) => {
+
+// app.post("/deluser",(req,res)=>{ delete from users where id =? ,[1]})
+app.post("/adduser", async (req, res) => {
     console.log("req.body");
     console.log(req.body);
-    try{
-        
+    const { name, email } = req.body;
+    try {
+        await pool.query(`insert into users (name,email) values (?,?)`, [name, email])
+        res.send("성공적으로 행데이터 삽입했습니다.");
+    } catch (e) {
+        console.log(e);
+        res.send("error" + e);
     }
+});
 
-    res.send("msgsuccess");
-})
+// req 요청 데이터... 
+// res 응답 데이터...
+
+app.post("/deluser", async (req, res) => {
+    console.log(req.body);
+    const { id } = req.body;
+    console.log(`id = ${id}`)
+    try {
+        await pool.query(`delete from users where id=?`, [id])
+        res.send("성공적으로 행데이터 삭제되었습니다.");
+    } catch (e) {
+        console.log(e);
+        res.send("error" + e);
+    }
+});
 
 
 
