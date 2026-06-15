@@ -3,11 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Management</title>
+    <style>
+        /* 깔끔한 폰트와 배경색 설정 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* 중앙 정렬용 카드 컨테이너 */
+        .container {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* 타이틀 스타일링 */
+        h1 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        /* 버튼 스타일로 변경된 링크 */
+        .btn-link {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #3498db;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(52, 152, 211, 0.2);
+        }
+
+        /* 마우스를 올렸을 때 효과 */
+        .btn-link:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(41, 128, 185, 0.3);
+        }
+
+        /* 클릭할 때 효과 */
+        .btn-link:active {
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <h1>Main</h1>
-    <h2>Users</h2>
-    <a href="/bb">입력및삭제수정페이지가기</a>
+
+    <div class="container">
+        <h1>Main</h1>
+        <h2>Users</h2>
+        {% for user in users %}
+            {{user.id}} {{user.email}} {{user.name}}
+        {% endfor %}
+        <a href="/bb" class="btn-link">입력 및 삭제/수정 페이지 가기</a>
+    </div>
+
 </body>
 </html>

@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extends: true }))
 
 // 넌적스 환경설정 시작
-nunjucks.configure('views', { express: app, watch:true } );
+nunjucks.configure('views', { express: app, watch: true });
 app.set('view engine', 'html');
 // 넌적스 환경설정 끝
 
@@ -39,9 +39,16 @@ const pool = mysql.createPool({
 //     { id: 2, name: '이순신', email: 'lee@example.com' }
 // ];
 
-app.get("/", function (req, res) {
+app.get("/", async function (req, res) {
     // res.send("<h1>main Page</h1><a href='/bb'>bb</a>");
-    res.render('main');
+    try {
+        const [rows] = await pool.query('select * from users');
+        res.render('main', { users: rows });
+    } catch (e) {
+        console.log('e' + e);
+        res.send("잘못된 서버");
+    }
+
 });
 
 app.get("/bb", function (req, res) {
