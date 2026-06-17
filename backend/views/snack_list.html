@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>SNACK</h1>
+    {% for item in snacks %}
+        <div style="border: 1px solid black;">
+        id {{item.snack_id}} 이름 {{item.snack_name}} 재고 {{item.stock}} {{item.price}}원<br/>
+        </div>
+    {% endfor %}
+</body>
+</html>
